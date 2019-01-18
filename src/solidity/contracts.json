@@ -1,0 +1,362 @@
+LendingsContractABI = [
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "contractAddresses",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "borrowerName",
+				"type": "string"
+			},
+			{
+				"name": "requestedAmount",
+				"type": "uint256"
+			},
+			{
+				"name": "paybackTime",
+				"type": "uint256"
+			},
+			{
+				"name": "interest",
+				"type": "uint256"
+			}
+		],
+		"name": "launchLendingContract",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "borrowerAddresses",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "borrower",
+				"type": "address"
+			}
+		],
+		"name": "getContractAddressFromBorrower",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getNumberOfBorrowers",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "borrowerName",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "contractAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "requestedAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "paybackTime",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "interest",
+				"type": "uint256"
+			}
+		],
+		"name": "showContractDetails",
+		"type": "event"
+	}
+];
+
+SingleLendingABI = [
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getTotalLendedAmount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "borrowerName",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getRequestedAmount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "requestedAmount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "borrower",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getLendingContractInformation",
+		"outputs": [
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "borrowerAddress",
+				"type": "address"
+			},
+			{
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"name": "payback",
+				"type": "uint256"
+			},
+			{
+				"name": "rate",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "lend",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "setName",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "deployer",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "totalLendedAmount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "_borrowerName",
+				"type": "string"
+			},
+			{
+				"name": "_borrower",
+				"type": "address"
+			},
+			{
+				"name": "_requestedAmount",
+				"type": "uint256"
+			},
+			{
+				"name": "_paybackTime",
+				"type": "uint256"
+			},
+			{
+				"name": "_interest",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "borrowerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "requestedAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "paybackTime",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "interest",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "lendersCount",
+				"type": "uint256"
+			}
+		],
+		"name": "showLenderInfo",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "lenderCount",
+				"type": "uint256"
+			}
+		],
+		"name": "loanFulfilled",
+		"type": "event"
+	}
+];

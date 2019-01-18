@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+   <script type="text/javascript" src="solidity/contracts.json"></script>   
+   <script src="node_modules/web3/dist/web3.min.js"></script> 
+  <title>Request Loan</title>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Request Loan</h1>
+  <form action="">
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" placeholder="First Name" />
+    <label for="fname">Last Name</label>
+    <input type="text" id="lname" placeholder="Last Name" />
+    <br />
+    <br />
+    <label for="amount">Amount</label>
+    <input type="text" id="requestedAmount" placeholder="Requested Amount" />
+    <select id="myCrypto" name="crypto">
+      <option value="ETH" selected>ETH</option>
+      <option value="NULS">NULS</option>
+    </select>
+
+    <br /><br />
+    <label for="paybackDate">Payback Date</label>
+    <input type="date" id="payback">
+
+    <br /><br />
+    <label for="interestRate">Interest Rate</label>
+    <input type="text" id="interestRate" />
+
+    <br /><br />
+    <button type="button" name="button" class="btn" onclick="myFunction()">Request Loan</button>
+    <!--<button id="requestLend" class="btn " onclick="requestLend()"> Request Some Money! </button> -->
+          
+  </form>
+  </div>
+
+  <p id="demo"></p>
+  <script type="text/javascript">
+
+    function myFunction() {
+      var txt;
+
+      let value = parseFloat(document.getElementById("requestedAmount").value);
+      let e = document.getElementById("myCrypto");
+      let text = e.options[e.selectedIndex].value;
+      let date = document.getElementById("payback").value;
+      let rate = document.getElementById("interestRate").value;
+
+      let name = document.getElementById("fname").value+" "+document.getElementById("lname").value;
+
+      // check if date is more than the date specified
+      date_now = Math.round((new Date()).getTime() / 1000);
+      date_selected = Math.round((new Date(date)).getTime() / 1000);
+
+      // calculate the interestRate
+      rate = parseFloat(rate);
+      console.log("Rate: ", rate);
+
+      if(date_now > date_selected) {
+        new_date = new Date(date_now*1000);
+        console.log("new", new_date);
+        alert("Invalid date selected. Date must be later than " +new_date);
+        return;
+      }
+      if (date == "") {
+        //alert("Invalid date selected. Date is empty.");
+        //return;
+      }
+      if (rate < 5) {
+        alert("Payback Rate has to be higher than 5%");
+        return;
+      }
+      if(value < 0.1 || value > 100){
+        alert("Loan value must be between 0.1 and 100.");
+        return;  
+      }
+
+      var question = prompt(String(name)+": This binds you to a legal agreement whereby you will have to pay "+String(value+value*rate/100)+" "+text+" by the "+String(date)+". By typing Y in the box you accept to abide by the agreement.");
+      if (question != "Y") {
+        console.log("User has denied the agreement");
+        return null;
+      }
+      else {
+        console.log("User has agreed to the contract details");
+
+        console.log(name+" "+value+" "+rate);
+        requestLend(name, value, 66, rate);
+        return true;
+      }
+    }
+
+  </script>
+
+  <script>
+
+    if(typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+      } else {
+        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+      }
+
+      web3.eth.defaultAccount = web3.eth.accounts[0];
+
+      var LendingContract = web3.eth.contract(LendingsContractABI);
+      var LCInstance = LendingContract.at('0x75123c4b7d86d7240915ef2d54faac4c14fe69e9');
+  
+      function requestLend(name, amount, paybackTimeInDays, interest){
+       console.log(web3.eth.defaultAccount);
+        LCInstance.launchLendingContract(name, amount, parseInt(paybackTimeInDays), parseInt(interest), {from:web3.eth.defaultAccount}, (error, result) => {
+          if(error){
+            $('#error').text("Error, mate!");
+          } else {
+            console.log("Requesting some money!! ");
+          }
+        });
+    }
+
+
+  </script>
+</body>
+</html>
